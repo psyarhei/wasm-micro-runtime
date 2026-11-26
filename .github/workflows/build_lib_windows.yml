@@ -40,5 +40,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: libiwasm-windows-release
-          path: product-mini/platforms/windows/build/Release/libiwasm.dll
+          path: product-mini/platforms/windows/build/${{ inputs.config }}/libiwasm.dll
           if-no-files-found: error
