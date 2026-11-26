@@ -2,6 +2,9 @@ name: Manual workflow
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - feature/shared_libs_workflows
 
 jobs:
   build-windows:
