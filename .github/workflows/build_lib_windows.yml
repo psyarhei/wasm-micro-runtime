@@ -2,6 +2,11 @@ name: Build Windows libiwasm
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - 'release/2.4.x'
+    paths:
+      - '.github/workflows/build_lib_windows.yml'
 
 jobs:
   build-windows:
