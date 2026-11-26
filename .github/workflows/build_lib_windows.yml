@@ -1,0 +1,44 @@
+name: Build Windows libiwasm
+
+on:
+  workflow_dispatch:
+    inputs:
+      config:
+        default: Release
+        type: choice
+        required: true
+        description: Build configuration
+        options:
+          - Release
+          - Debug
+
+      ref:
+        default: main
+        required: true
+        description: Branch, tag, or full commit SHA to build
+        type: string
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ inputs.ref }}
+
+      - name: Build libiwasm
+        shell: pwsh
+        run: |
+          cd product-mini/platforms/windows/
+          mkdir build
+          cd build
+          cmake .. -DBUILD_SHARED_LIBS=ON
+          cmake --build . --config ${{ inputs.config }}
+
+      - name: Upload libiwasm.dll
+        uses: actions/upload-artifact@v4
+        with:
+          name: libiwasm-windows-release
+          path: product-mini/platforms/windows/build/Release/libiwasm.dll
+          if-no-files-found: error
