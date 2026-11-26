@@ -7,8 +7,8 @@ jobs:
   build-windows:
     runs-on: windows-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v6.1.0
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
 
       - name: Build iwasm (Release)
         shell: pwsh
